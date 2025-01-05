@@ -17,14 +17,17 @@ import { getAppIcon, setAppIcon } from "expo-dynamic-app-icon";
 const ICONS = [
   {
     name: "Default",
+    id: "main",
     icon: require("@/assets/images/icon.png"),
   },
   {
     name: "Dark",
+    id: "dark",
     icon: require("@/assets/images/icon-dark.png"),
   },
   {
     name: "Vivid",
+    id: "vivid",
     icon: require("@/assets/images/icon-vivid.png"),
   },
 ];
@@ -36,14 +39,13 @@ const AccountPage = () => {
   const [lastName, setLastName] = useState(user?.lastName);
   const [edit, setEdit] = useState(false);
 
-  const [activeIcon, setActiveIcon] = useState("Default");
+  const [activeIcon, setActiveIcon] = useState("main");
 
   useEffect(() => {
-    const loadCurrentIconPref = async () => {
+    (async () => {
       const icon = await getAppIcon();
-      console.log({ icon });
       setActiveIcon(icon);
-    };
+    })();
   }, []);
 
   const onSaveUser = async () => {
@@ -140,12 +142,13 @@ const AccountPage = () => {
       <View style={styles.actions}>
         {ICONS.map((icon) => (
           <TouchableOpacity
-            onPress={() => onChangeAppIcon(icon.name)}
+            key={icon.id}
+            onPress={() => onChangeAppIcon(icon.id)}
             style={styles.btn}
           >
             <Image source={icon.icon} style={{ width: 24, height: 24 }} />
             <Text style={{ color: "#fff", fontSize: 18 }}>{icon.name}</Text>
-            {activeIcon?.toLowerCase() === icon.name.toLowerCase() && (
+            {activeIcon?.toLowerCase() === icon.id.toLowerCase() && (
               <Ionicons name="checkmark-outline" size={24} color={"#ffffff"} />
             )}
           </TouchableOpacity>

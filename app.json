@@ -22,7 +22,11 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.jadepelumi.diddlepay"
+      "package": "com.jadepelumi.diddlepay",
+      "permissions": [
+        "android.permission.USE_BIOMETRIC",
+        "android.permission.USE_FINGERPRINT"
+      ]
     },
     "web": {
       "bundler": "metro",
@@ -48,7 +52,7 @@
       [
         "expo-dynamic-app-icon",
         {
-          "default": {
+          "main": {
             "image": "./assets/images/icon.png",
             "prerendered": true
           },
@@ -65,6 +69,11 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "eas": {
+        "projectId": "2dd8b9f1-acc1-4de6-8393-e252be245f0c"
+      }
     }
   }
 }
